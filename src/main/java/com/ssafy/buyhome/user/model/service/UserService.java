@@ -11,7 +11,7 @@ public class UserService {
 
     private final UserDao userDao;
 
-    public User findById(String userId) {
+    public User findById(int userId) {
         return userDao.select(userId);
     }
 

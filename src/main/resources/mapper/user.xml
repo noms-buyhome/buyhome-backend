@@ -4,12 +4,21 @@
 
 <mapper namespace="com.ssafy.buyhome.user.model.dao.UserDao">
 
+    <resultMap id="user" type="User">
+        <result column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="email" property="email"/>
+        <result column="created_time" property="createdTime"/>
+
+    </resultMap>
+
     <insert id="insert" parameterType="user">
         INSERT INTO user(username, password, email)
         VALUES (#{username}, #{password}, #{email})
     </insert>
 
-    <select id="select" parameterType="int" resultType="user">
+    <select id="select" parameterType="int" resultMap="user">
         select *
         from user
         where id = #{id}
