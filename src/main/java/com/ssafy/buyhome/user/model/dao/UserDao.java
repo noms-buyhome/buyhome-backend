@@ -12,4 +12,6 @@ public interface UserDao {
     void insert(User user);
 
     void update(@Param("id") Integer userId, @Param("data") User data);
+
+    void delete(@Param("id") Integer userId);
 }

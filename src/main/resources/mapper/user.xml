@@ -31,7 +31,7 @@
         where id = #{id}
     </update>
 
-    <delete id="delete" parameterType="string">
+    <delete id="delete" parameterType="int">
         DELETE
         FROM user
         WHERE id = #{id}

@@ -22,4 +22,8 @@ public class UserService {
     public void update(Integer userId, User incomingData) {
         userDao.update(userId, incomingData);
     }
+
+    public void delete(Integer userId) {
+        userDao.delete(userId);
+    }
 }
