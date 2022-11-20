@@ -10,6 +10,6 @@ import lombok.*;
 public class Token {
 
     private String access;
-    private String refresh;
+//    private String refresh;
 
 }

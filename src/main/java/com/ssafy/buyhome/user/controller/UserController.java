@@ -14,12 +14,6 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping
-    public ResponseEntity<?> create(@RequestBody User user) {
-        userService.create(user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
     @GetMapping("/{userid}")
     public ResponseEntity<?> findById(@PathVariable("userid") Integer userId) {
         return new ResponseEntity<>(userService.findById(userId), HttpStatus.OK);

@@ -14,8 +14,18 @@ import java.time.LocalDateTime;
 public class User {
 
     private int id;
-    private String username;
+    private String username; // 로그인 시 입력하는 이름
+    private String nickname; // 서비스 내 표시되는 이름
     private String password;
     private String email;
     private LocalDateTime createdTime;
+
+    private String role;
+
+    public User(String username, String nickname, String role) {
+        this.username = username;
+        this.nickname = nickname;
+        this.role = role;
+        this.password = "cannot empty";
+    }
 }

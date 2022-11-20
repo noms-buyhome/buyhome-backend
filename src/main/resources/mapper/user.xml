@@ -24,6 +24,12 @@
         where id = #{id}
     </select>
 
+    <select id="selectByUsername" parameterType="string" resultMap="user">
+        select *
+        from user
+        where username = #{username}
+    </select>
+
     <update id="update" parameterType="map">
         update user
         set email    = #{data.email},
