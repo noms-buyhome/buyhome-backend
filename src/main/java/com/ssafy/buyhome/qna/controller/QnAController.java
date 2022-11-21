@@ -1,12 +1,10 @@
 package com.ssafy.buyhome.qna.controller;
 
+import com.ssafy.buyhome.qna.model.dto.Question;
 import com.ssafy.buyhome.qna.model.service.QnaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/board/qna")
@@ -23,5 +21,11 @@ public class QnAController {
     @GetMapping("/{qnaid}")
     public ResponseEntity<?> findById(@PathVariable("qnaid") Integer qnaId) {
         return ResponseEntity.ok(qnaService.findById(qnaId));
+    }
+
+    @PostMapping
+    public ResponseEntity<?> create(@RequestBody Question question) {
+        qnaService.create(question);
+        return ResponseEntity.ok().build();
     }
 }

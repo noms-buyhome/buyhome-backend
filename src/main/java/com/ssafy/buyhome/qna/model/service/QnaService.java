@@ -22,4 +22,8 @@ public class QnaService {
     public Question findById(int id) {
         return questionDao.select(id);
     }
+
+    public void create(Question question) {
+        questionDao.insert(question);
+    }
 }

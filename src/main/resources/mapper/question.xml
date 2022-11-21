@@ -39,7 +39,7 @@
 
 
     <select id="select" parameterType="int" resultMap="questionDetail">
---         select *
+        --         select *
         select q.id           as id,
                q.title        as title,
                q.content      as content,
@@ -60,12 +60,19 @@
                            on (q.user_id = u.id)
                  left outer join answer a
                                  on (q.id = a.question_id)
-        where q.id=#{id}
+        where q.id = #{id}
     </select>
 
     <select id="selectAll" resultMap="questionItem">
         select *
-        from question q join user u
-        on (q.user_id = u.id)
+        from question q
+                 join user u
+                      on (q.user_id = u.id)
     </select>
+
+    <insert id="insert" parameterType="question">
+        insert into question (user_id, title, content)
+        values (#{author.id}, #{title}, #{content})
+    </insert>
+
 </mapper>
