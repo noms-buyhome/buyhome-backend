@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.buyhome.user.model.dao.UserDao;
 import com.ssafy.buyhome.user.model.dto.Token;
 import com.ssafy.buyhome.user.model.dto.User;
-import com.ssafy.buyhome.user.model.exception.UserNotFoundException;
 import com.ssafy.buyhome.util.ParameterStringBuilder;
 import com.ssafy.buyhome.util.TokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +38,7 @@ public class KakaoAuthService implements AuthService {
     public Token login(String code) {
         Map<String, String> kakaoToken = getKakaoToken(code);
         User user = getUser(kakaoToken);
-        return tokenProvider.createToken(user.getUsername(), user.getRole());
+        return tokenProvider.createToken(user.getUsername(), user.getAuthority());
     }
 
     @Override

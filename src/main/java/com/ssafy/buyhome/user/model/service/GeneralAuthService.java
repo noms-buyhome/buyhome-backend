@@ -21,7 +21,7 @@ public class GeneralAuthService implements AuthService{
         User user = userDao.selectByUsername(username);
         if (user == null) throw new UserNotFoundException();
         if (!user.getPassword().equals(password)) throw new LoginFailedException();
-        return tokenProvider.createToken(user.getUsername(), user.getRole());
+        return tokenProvider.createToken(user.getUsername(), user.getAuthority());
     }
 
     @Override
