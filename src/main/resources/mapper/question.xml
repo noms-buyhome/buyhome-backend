@@ -75,4 +75,9 @@
         values (#{author.id}, #{title}, #{content})
     </insert>
 
+    <update id="update" parameterType="question">
+        update question
+        set title=#{title}, content=#{content}
+        where id=#{id}
+    </update>
 </mapper>

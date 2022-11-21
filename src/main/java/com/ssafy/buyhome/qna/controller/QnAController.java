@@ -28,4 +28,10 @@ public class QnAController {
         qnaService.create(question);
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping("/{qnaid}")
+    public ResponseEntity<?> update(@RequestBody Question question, @PathVariable Integer qnaid) {
+        qnaService.update(qnaid, question);
+        return ResponseEntity.ok().build();
+    }
 }

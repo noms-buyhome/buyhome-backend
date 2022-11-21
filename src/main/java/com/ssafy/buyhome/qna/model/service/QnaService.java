@@ -26,4 +26,9 @@ public class QnaService {
     public void create(Question question) {
         questionDao.insert(question);
     }
+
+    public void update(Integer questionId, Question question) {
+        question.setId(questionId);
+        questionDao.update(question);
+    }
 }

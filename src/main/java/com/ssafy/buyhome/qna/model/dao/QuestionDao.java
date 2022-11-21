@@ -13,7 +13,7 @@ public interface QuestionDao {
 
     void insert(Question question);
 
-    void update(@Param("id") Integer questionId, @Param("data") Question data);
+    void update(Question question);
 
     void delete(@Param("id") Integer questionId);
 
