@@ -47,7 +47,7 @@ public class KakaoAuthService implements AuthService {
     }
 
     private Map<String, String> getKakaoToken(String code) {
-        Map<String,String> response = null;
+        Map<String, String> response = null;
         try {
             URL url = new URL(REQUEST_URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -96,7 +96,7 @@ public class KakaoAuthService implements AuthService {
 
             connection.setRequestMethod("GET");
             String accessToken = "Bearer " + token.get("access_token");
-            connection.setRequestProperty("Authorization",accessToken);
+            connection.setRequestProperty("Authorization", accessToken);
 
             Map response = getJsonResponse(connection);
             String username = String.valueOf(response.get("id"));
@@ -105,8 +105,10 @@ public class KakaoAuthService implements AuthService {
 
             if (user == null) {
                 String nickname = (String) ((HashMap) response.get("properties")).get("nickname");
-                this.register(new User(username, nickname, "user"));
+                user = new User(username, nickname, "user");
+                this.register(user);
             }
+
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

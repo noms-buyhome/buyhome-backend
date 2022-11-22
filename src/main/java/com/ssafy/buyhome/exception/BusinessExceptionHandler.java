@@ -10,7 +10,7 @@ public class BusinessExceptionHandler {
 
     @ExceptionHandler(BusinessBadRequestException.class)
     public ResponseEntity<?> handleBadRequest(Exception e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(BusinessNotFoundException.class)
@@ -21,5 +21,10 @@ public class BusinessExceptionHandler {
     @ExceptionHandler(BusinessUnauthorizedException.class)
     public ResponseEntity<?> handleUnauthorized(Exception e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(BusinessDuplicatedException.class)
+    public ResponseEntity<?> handleDuplicated(Exception e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }
 }
