@@ -113,4 +113,9 @@
         from answer
         where question_id=#{questionId}
     </delete>
+
+    <insert id="insertAnswerToQuestion" parameterType="map">
+        insert into answer (title, content,user_id, question_id)
+        values (#{answer.title}, #{answer.content}, #{answer.user.id}, #{questionId})
+    </insert>
 </mapper>

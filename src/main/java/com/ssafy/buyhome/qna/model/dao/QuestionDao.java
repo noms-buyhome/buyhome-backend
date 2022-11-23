@@ -1,5 +1,6 @@
 package com.ssafy.buyhome.qna.model.dao;
 
+import com.ssafy.buyhome.qna.model.dto.Answer;
 import com.ssafy.buyhome.qna.model.dto.Question;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,4 +22,5 @@ public interface QuestionDao {
     void deleteAnswerByQuestionId(@Param("questionId") Integer questionId);
     List<Question> selectAll();
 
+    void insertAnswerToQuestion(@Param("answer") Answer answer, @Param("questionId") Integer questionId);
 }
