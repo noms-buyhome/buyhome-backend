@@ -2,16 +2,14 @@ package com.ssafy.buyhome.util;
 
 import com.ssafy.buyhome.user.model.dto.Token;
 import com.ssafy.buyhome.user.model.exception.UserUnauthorizedException;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.Date;
 
@@ -41,14 +39,12 @@ public class TokenProvider {
     }
 
     public boolean validateAccessToken(String token) {
-        try {
-            Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(accessKey).build().parseClaimsJws(token);
-            return claimsJws.getBody()
-                    .getExpiration()
-                    .after(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
-        } catch (Exception e) {
-            return false;
-        }
+        Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(accessKey).build().parseClaimsJws(token);
+        Date now = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        return claimsJws.getBody()
+                .getExpiration()
+                .after(now);
+
     }
 
     public String getUsernameFromToken(String token) {
