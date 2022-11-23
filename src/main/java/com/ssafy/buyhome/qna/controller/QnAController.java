@@ -1,5 +1,6 @@
 package com.ssafy.buyhome.qna.controller;
 
+import com.ssafy.buyhome.qna.model.dto.Answer;
 import com.ssafy.buyhome.qna.model.dto.Question;
 import com.ssafy.buyhome.qna.model.service.QnaService;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +31,14 @@ public class QnAController {
     }
 
     @PutMapping("/{qnaid}")
-    public ResponseEntity<?> update(@RequestBody Question question, @PathVariable Integer qnaid) {
-        qnaService.update(qnaid, question);
+    public ResponseEntity<?> update(@PathVariable("qnaid") Integer qnaId, @RequestBody Question question) {
+        qnaService.update(qnaId, question);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{qnaid}")
+    public ResponseEntity<?> create(@PathVariable("qnaid") Integer qnaId, @RequestBody Answer answer) {
+        qnaService.createAnswerToQuestion(answer, qnaId);
         return ResponseEntity.ok().build();
     }
 }

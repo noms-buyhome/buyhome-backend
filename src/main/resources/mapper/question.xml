@@ -32,6 +32,7 @@
     <resultMap id="user" type="User">
         <id property="id" column="id"/>
         <result property="username" column="username"/>
+        <result column="nickname" property="nickname"/>
         <result property="password" column="password"/>
         <result property="email" column="email"/>
         <result property="createdTime" column="created_time"/>
@@ -46,6 +47,7 @@
                q.created_time as created_time,
                u.id           as author_id,
                u.username     as author_username,
+               u.nickname     as author_nickname,
                u.password     as author_password,
                u.email        as author_email,
                u.authority    as author_authority,
@@ -64,7 +66,17 @@
     </select>
 
     <select id="selectAll" resultMap="questionItem">
-        select *
+        select q.id           as id,
+               q.title        as title,
+               q.content      as content,
+               q.created_time as created_time,
+               u.id           as author_id,
+               u.username     as author_username,
+               u.nickname     as author_nickname,
+               u.password     as author_password,
+               u.email        as author_email,
+               u.authority    as author_authority,
+               u.created_time as author_created_time
         from question q
                  join user u
                       on (q.user_id = u.id)
@@ -101,4 +113,9 @@
         from answer
         where question_id=#{questionId}
     </delete>
+
+    <insert id="createAnswerToQuestion" parameterType="map">
+        insert into answer (title, content, user_id, question_id)
+        values (#{answer.title}, #{answer.content}, #{answer.author.id}, #{questionId})
+    </insert>
 </mapper>
