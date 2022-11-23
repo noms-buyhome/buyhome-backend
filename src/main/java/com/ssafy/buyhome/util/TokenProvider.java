@@ -1,7 +1,7 @@
 package com.ssafy.buyhome.util;
 
 import com.ssafy.buyhome.user.model.dto.Token;
-import com.ssafy.buyhome.user.model.dto.User;
+import com.ssafy.buyhome.user.model.exception.UserUnauthorizedException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -51,4 +51,12 @@ public class TokenProvider {
         }
     }
 
+    public String getUsernameFromToken(String token) {
+        try {
+            Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(accessKey).build().parseClaimsJws(token);
+            return claimsJws.getBody().getSubject();
+        } catch (Exception e) {
+            throw new UserUnauthorizedException();
+        }
+    }
 }
