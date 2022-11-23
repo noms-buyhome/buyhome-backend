@@ -70,6 +70,15 @@
                       on (q.user_id = u.id)
     </select>
 
+    <select id="selectAllByUserID" resultMap="questionItem">
+        select *
+        from question q
+                 left join answer a
+                      on (q.user_id = a.question_id)
+        where q.user_id = #{userId}
+    </select>
+
+
     <insert id="insert" parameterType="question">
         insert into question (user_id, title, content)
         values (#{author.id}, #{title}, #{content})
@@ -80,4 +89,16 @@
         set title=#{title}, content=#{content}
         where id=#{id}
     </update>
+
+    <delete id="deleteQuestionByUserId" parameterType="int">
+        delete
+        from question
+        where user_id=#{userId}
+    </delete>
+
+    <delete id="deleteAnswerByQuestionId" parameterType="int">
+        delete
+        from answer
+        where question_id=#{questionId}
+    </delete>
 </mapper>

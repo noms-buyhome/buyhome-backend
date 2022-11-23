@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Question {
 
-    private long id;
+    private Integer id;
     private User author;
     private String title;
     private String content;
