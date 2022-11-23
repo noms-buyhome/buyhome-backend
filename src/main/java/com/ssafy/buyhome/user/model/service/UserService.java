@@ -15,10 +15,9 @@ public class UserService {
         return userDao.select(userId);
     }
 
-//    public void create(User user) {
-//        userDao.insert(user);
-//    }
-
+    public User findByUsername(String username) {
+        return userDao.selectByUsername(username);
+    }
     public void update(Integer userId, User incomingData) {
         userDao.update(userId, incomingData);
     }
