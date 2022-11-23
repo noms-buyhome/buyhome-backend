@@ -10,21 +10,25 @@ public class BusinessExceptionHandler {
 
     @ExceptionHandler(BusinessBadRequestException.class)
     public ResponseEntity<?> handleBadRequest(Exception e) {
+        e.printStackTrace();
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(BusinessNotFoundException.class)
     public ResponseEntity<?> handleNotFound(Exception e) {
+        e.printStackTrace();
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(BusinessUnauthorizedException.class)
     public ResponseEntity<?> handleUnauthorized(Exception e) {
+        e.printStackTrace();
         return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(BusinessDuplicatedException.class)
     public ResponseEntity<?> handleDuplicated(Exception e) {
+        e.printStackTrace();
         return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }
 }
