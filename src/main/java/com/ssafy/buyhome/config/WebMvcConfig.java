@@ -15,7 +15,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("*");
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:8081/api")
+                .allowedHeaders("Authorization")
+                .allowedMethods("*")
+                .exposedHeaders("*")
+                .maxAge(1800);
     }
 
     @Override
@@ -23,4 +28,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(jwtInterceptor)
                 .addPathPatterns("/user/*");
     }
+
+
 }
