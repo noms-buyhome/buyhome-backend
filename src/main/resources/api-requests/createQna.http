@@ -1,0 +1,16 @@
+POST http://localhost:80/api/board/qna
+Content-Type: application/json
+
+{
+  "author": {
+    "id": 41,
+    "username": "ssafy",
+    "password": "ssafy",
+    "email": "ssafy@ssafy.com",
+    "createdTime": "2022-11-21T14:00:07"
+  },
+  "title": "insert test",
+  "content": "something"
+}
+
+###

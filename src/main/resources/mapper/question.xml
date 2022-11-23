@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.buyhome.qna.model.dao.QuestionDao">
+
+    <resultMap id="questionDetail" type="Question">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="createdTime" column="created_time"/>
+        <association property="author" resultMap="user" columnPrefix="author_"/>
+        <collection property="answers" ofType="Answer" resultMap="answer" columnPrefix="answer_"/>
+    </resultMap>
+
+    <resultMap id="questionItem" type="Question">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="createdTime" column="created_time"/>
+        <association property="author" resultMap="user" columnPrefix="author_"/>
+    </resultMap>
+
+    <resultMap id="answer" type="Answer">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="createdTime" column="created_time"/>
+        <association property="author" resultMap="user"/>
+    </resultMap>
+
+    <resultMap id="user" type="User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="createdTime" column="created_time"/>
+    </resultMap>
+
+
+    <select id="select" parameterType="int" resultMap="questionDetail">
+        --         select *
+        select q.id           as id,
+               q.title        as title,
+               q.content      as content,
+               q.created_time as created_time,
+               u.id           as author_id,
+               u.username     as author_username,
+               u.password     as author_password,
+               u.email        as author_email,
+               u.authority    as author_authority,
+               u.created_time as author_created_time,
+               a.id           as answer_id,
+               a.user_id      as answer_user_id,
+               a.title        as answer_title,
+               a.content      as answer_content,
+               a.created_time as answer_created_time
+        from question q
+                 left join user u
+                           on (q.user_id = u.id)
+                 left outer join answer a
+                                 on (q.id = a.question_id)
+        where q.id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="questionItem">
+        select *
+        from question q
+                 join user u
+                      on (q.user_id = u.id)
+    </select>
+
+    <insert id="insert" parameterType="question">
+        insert into question (user_id, title, content)
+        values (#{author.id}, #{title}, #{content})
+    </insert>
+
+    <update id="update" parameterType="question">
+        update question
+        set title=#{title}, content=#{content}
+        where id=#{id}
+    </update>
+</mapper>
