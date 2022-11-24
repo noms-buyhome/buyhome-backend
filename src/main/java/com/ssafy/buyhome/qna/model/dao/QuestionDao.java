@@ -27,4 +27,6 @@ public interface QuestionDao {
     void updateAnswer(Answer answer);
 
     void deleteAnswerById(@Param("id") Integer answerId);
+
+    Answer selectAnswerById(Integer answerId);
 }
