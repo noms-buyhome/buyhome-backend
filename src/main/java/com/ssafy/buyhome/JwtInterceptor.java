@@ -26,12 +26,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             return true;
         }
         String token = request.getHeader(AUTH_HEADER);
-        Enumeration<String> headerNames = request.getHeaderNames();
-        while (headerNames.hasMoreElements()) {
-            String element = headerNames.nextElement();
-            System.out.print(element + " : ");
-            System.out.println(request.getHeader(element));
-        }
+
         if (token != null && tokenProvider.validateAccessToken(token)) return true;
 
         throw new UserUnauthorizedException();
