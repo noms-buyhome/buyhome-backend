@@ -28,7 +28,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String token = request.getHeader(AUTH_HEADER);
         if (token != null && tokenProvider.validateAccessToken(token)) {
             String username = tokenProvider.getUsernameFromToken(token);
-            request.setAttribute("username", username);
+            request.setAttribute("username", username); // token이 존재할 경우 request에 담아서 전송(controller에서 접근할 수 있게)
             chain.doFilter(request, response);
         } else {
             throw new UserUnauthorizedException();
@@ -39,7 +39,7 @@ public class JwtFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String requestURI = request.getRequestURI();
         String method = request.getMethod();
-        if (method.equals("OPTIONS")) return true;
+        if (method.equals("OPTIONS")) return true; //method가 options일 경우는 preflight이므로 헤더에 token이 포함되지 않음
         for (String url : NO_NEED_AUTH_PREFIX) {
             if (requestURI.startsWith(url)) return true;
         }
