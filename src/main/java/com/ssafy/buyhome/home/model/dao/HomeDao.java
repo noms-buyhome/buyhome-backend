@@ -9,4 +9,5 @@ import java.util.List;
 public interface HomeDao {
 
     List<HomeInfo> findByDongCode(String dongCode);
+    HomeInfo getAptInfo(String aptCode);
 }

@@ -14,13 +14,18 @@
         <result column="jibun" property="jibun"/>
         <result column="lat" property="lat"/>
         <result column="lng" property="lng"/>
-
     </resultMap>
 
     <select id="findByDongCode" parameterType="String" resultMap="homeInfo">
         select *
         from houseinfo
         where dongcode = #{dongCode}
+    </select>
+
+    <select id="getAptInfo" parameterType="String" resultMap="homeInfo">
+        select *
+        from houseinfo
+        where aptCode = #{aptCode}
     </select>
 
 <!--    <insert id="insert" parameterType="user">-->
