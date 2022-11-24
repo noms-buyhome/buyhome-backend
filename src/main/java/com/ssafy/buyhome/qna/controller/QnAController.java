@@ -42,6 +42,13 @@ public class QnAController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/{qnaid}")
+    public ResponseEntity<?> deleteQuestion(@PathVariable("qnaid") Integer qnaId) {
+        qnaService.deleteQuestion(qnaId);
+        return ResponseEntity.ok().build();
+    }
+
+
     @PutMapping("/{qnaid}/answers/{answerid}")
     public ResponseEntity<?> updateAnswer(@PathVariable("answerid") Integer answerId, @RequestBody Answer answer) {
         qnaService.updateAnswer(answerId, answer);

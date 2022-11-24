@@ -86,7 +86,7 @@
         select *
         from question q
                  left join answer a
-                      on (q.user_id = a.question_id)
+                           on (q.user_id = a.question_id)
         where q.user_id = #{userId}
     </select>
 
@@ -98,20 +98,27 @@
 
     <update id="update" parameterType="question">
         update question
-        set title=#{title}, content=#{content}
-        where id=#{id}
+        set title=#{title},
+            content=#{content}
+        where id = #{id}
     </update>
+
+    <delete id="deleteQuestionById" parameterType="int">
+        delete
+        from question
+        where id = #{id}
+    </delete>
 
     <delete id="deleteQuestionByUserId" parameterType="int">
         delete
         from question
-        where user_id=#{userId}
+        where user_id = #{userId}
     </delete>
 
     <delete id="deleteAnswerByQuestionId" parameterType="int">
         delete
         from answer
-        where question_id=#{questionId}
+        where question_id = #{questionId}
     </delete>
 
     <insert id="createAnswerToQuestion" parameterType="map">
@@ -121,13 +128,14 @@
 
     <update id="updateAnswer" parameterType="answer">
         update answer
-        set title=#{title}, content=#{content}
-        where id=#{id}
+        set title=#{title},
+            content=#{content}
+        where id = #{id}
     </update>
 
     <delete id="deleteAnswerById" parameterType="int">
         delete
         from answer
-        where id=#{id}
+        where id = #{id}
     </delete>
 </mapper>

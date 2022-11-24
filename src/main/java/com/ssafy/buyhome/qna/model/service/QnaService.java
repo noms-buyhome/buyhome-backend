@@ -47,4 +47,8 @@ public class QnaService {
     public void deleteAnswer(Integer answerId) {
         questionDao.deleteAnswerById(answerId);
     }
+
+    public void deleteQuestion(Integer qnaId) {
+        questionDao.deleteQuestionById(qnaId);
+    }
 }

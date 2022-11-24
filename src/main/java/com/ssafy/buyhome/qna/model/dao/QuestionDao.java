@@ -17,7 +17,7 @@ public interface QuestionDao {
     void insert(Question question);
 
     void update(Question question);
-    void delete(@Param("id") Integer questionId);
+    void deleteQuestionById(@Param("id") Integer questionId);
     void deleteQuestionByUserId(@Param("userId") Integer userId);
     void deleteAnswerByQuestionId(@Param("questionId") Integer questionId);
     List<Question> selectAll();
