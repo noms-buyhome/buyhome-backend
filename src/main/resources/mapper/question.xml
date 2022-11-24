@@ -118,4 +118,16 @@
         insert into answer (title, content, user_id, question_id)
         values (#{answer.title}, #{answer.content}, #{answer.author.id}, #{questionId})
     </insert>
+
+    <update id="updateAnswer" parameterType="answer">
+        update answer
+        set title=#{title}, content=#{content}
+        where id=#{id}
+    </update>
+
+    <delete id="deleteAnswerById" parameterType="int">
+        delete
+        from answer
+        where id=#{id}
+    </delete>
 </mapper>

@@ -5,6 +5,7 @@ import com.ssafy.buyhome.qna.model.dto.Answer;
 import com.ssafy.buyhome.qna.model.dto.Question;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -35,5 +36,15 @@ public class QnaService {
 
     public void createAnswerToQuestion(Answer answer, Integer qnaId) {
         questionDao.createAnswerToQuestion(answer, qnaId);
+    }
+
+    public void updateAnswer(Integer answerId, Answer answer) {
+        answer.setId(answerId);
+        questionDao.updateAnswer(answer);
+    }
+
+    @Transactional
+    public void deleteAnswer(Integer answerId) {
+        questionDao.deleteAnswerById(answerId);
     }
 }

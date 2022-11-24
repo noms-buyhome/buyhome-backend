@@ -23,4 +23,8 @@ public interface QuestionDao {
     List<Question> selectAll();
 
     void createAnswerToQuestion(@Param("answer") Answer answer, @Param("questionId") Integer questionId);
+
+    void updateAnswer(Answer answer);
+
+    void deleteAnswerById(@Param("id") Integer answerId);
 }
