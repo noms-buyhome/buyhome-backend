@@ -1,0 +1,5 @@
+GET http://localhost:8080/api/user/me
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzc2FmeSIsImF1dGhvcml0eSI6InVzZXIiLCJleHAiOjE2NjkxOTc2MDJ9.Amh_t6Hhx1gwjqXWcbjbJ2R_GjtpOFHbuZPQankE0ms
+Accept: application/json
+
+###
