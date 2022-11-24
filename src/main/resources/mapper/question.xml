@@ -26,7 +26,7 @@
         <result property="title" column="title"/>
         <result property="content" column="content"/>
         <result property="createdTime" column="created_time"/>
-        <association property="author" resultMap="user"/>
+        <association property="author" resultMap="user" columnPrefix="author_"/>
     </resultMap>
 
     <resultMap id="user" type="User">
@@ -138,4 +138,24 @@
         from answer
         where id = #{id}
     </delete>
+    <select id="selectAnswerById" parameterType="int" resultMap="answer">
+        --         select *
+        select a.id           as id,
+               a.user_id      as user_id,
+               a.title        as title,
+               a.content      as content,
+               a.created_time as created_time,
+               u.id           as author_id,
+               u.username     as author_username,
+               u.nickname     as author_nickname,
+               u.password     as author_password,
+               u.email        as author_email,
+               u.authority    as author_authority,
+               u.created_time as author_created_time
+        from answer a
+                 left join user u
+                           on (a.user_id = u.id)
+        where a.id = #{id}
+    </select>
+
 </mapper>
