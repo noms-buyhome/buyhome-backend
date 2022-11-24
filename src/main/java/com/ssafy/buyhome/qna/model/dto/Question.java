@@ -1,10 +1,7 @@
 package com.ssafy.buyhome.qna.model.dto;
 
 import com.ssafy.buyhome.user.model.dto.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,6 +10,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Question {
 
     private Integer id;
