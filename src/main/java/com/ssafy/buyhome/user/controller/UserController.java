@@ -2,10 +2,14 @@ package com.ssafy.buyhome.user.controller;
 
 import com.ssafy.buyhome.user.model.dto.User;
 import com.ssafy.buyhome.user.model.service.UserService;
+import com.ssafy.buyhome.util.TokenProvider;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/user")
@@ -13,11 +17,14 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final TokenProvider tokenProvider;
 
-    @PostMapping
-    public ResponseEntity<?> create(@RequestBody User user) {
-        userService.create(user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @GetMapping("/me")
+    public ResponseEntity<?> findMe(HttpServletRequest request) {
+        String token = request.getHeader("Authorization");
+        System.out.println("user/me call :: " + token);
+        String username = tokenProvider.getUsernameFromToken(token);
+        return new ResponseEntity<>(userService.findByUsername(username), HttpStatus.OK);
     }
 
     @GetMapping("/{userid}")

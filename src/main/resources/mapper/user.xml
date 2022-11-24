@@ -14,8 +14,8 @@
     </resultMap>
 
     <insert id="insert" parameterType="user">
-        INSERT INTO user(username, password, email)
-        VALUES (#{username}, #{password}, #{email})
+        INSERT INTO user(username, nickname,password, email)
+        VALUES (#{username}, #{nickname},#{password}, #{email})
     </insert>
 
     <select id="select" parameterType="int" resultMap="user">
@@ -24,9 +24,16 @@
         where id = #{id}
     </select>
 
+    <select id="selectByUsername" parameterType="string" resultMap="user">
+        select *
+        from user
+        where username = #{username}
+    </select>
+
     <update id="update" parameterType="map">
         update user
         set email    = #{data.email},
+            nickname = #{data.nickname},
             password = #{data.password}
         where id = #{id}
     </update>
