@@ -38,6 +38,7 @@ public class QnaService {
         questionDao.update(question);
     }
 
+
     public Answer findAnswerById(Integer answerId) {
         return questionDao.selectAnswerById(answerId);
     }

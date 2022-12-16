@@ -32,7 +32,7 @@
     <resultMap id="user" type="User">
         <id property="id" column="id"/>
         <result property="username" column="username"/>
-        <result column="nickname" property="nickname"/>
+        <result property="nickname" column="nickname"/>
         <result property="password" column="password"/>
         <result property="email" column="email"/>
         <result property="createdTime" column="created_time"/>
@@ -138,6 +138,7 @@
         from answer
         where id = #{id}
     </delete>
+
     <select id="selectAnswerById" parameterType="int" resultMap="answer">
         --         select *
         select a.id           as id,

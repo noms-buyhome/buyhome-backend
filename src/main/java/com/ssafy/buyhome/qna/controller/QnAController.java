@@ -79,4 +79,10 @@ public class QnAController {
         qnaService.deleteAnswer(answerId);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/{qnaId}")
+    public ResponseEntity<?> createAnswer(@RequestBody Answer answer, @PathVariable Integer qnaId) {
+        qnaService.createAnswerToQuestion(answer, qnaId);
+        return ResponseEntity.ok().build();
+    }
 }
