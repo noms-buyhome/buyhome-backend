@@ -17,10 +17,16 @@ public interface QuestionDao {
     void insert(Question question);
 
     void update(Question question);
-    void delete(@Param("id") Integer questionId);
+    void deleteQuestionById(@Param("id") Integer questionId);
     void deleteQuestionByUserId(@Param("userId") Integer userId);
     void deleteAnswerByQuestionId(@Param("questionId") Integer questionId);
     List<Question> selectAll();
 
-    void insertAnswerToQuestion(@Param("answer") Answer answer, @Param("questionId") Integer questionId);
+    void createAnswerToQuestion(@Param("answer") Answer answer, @Param("questionId") Integer questionId);
+
+    void updateAnswer(Answer answer);
+
+    void deleteAnswerById(@Param("id") Integer answerId);
+
+    Answer selectAnswerById(Integer answerId);
 }

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @ToString
 public class Answer {
 
-    private long id;
+    private Integer id;
     private User author;
     private String title;
     private String content;

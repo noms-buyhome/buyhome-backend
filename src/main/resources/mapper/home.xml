@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.buyhome.home.model.dao.HomeDao">
+
+    <resultMap id="homeInfo" type="HomeInfo">
+        <result column="aptCode" property="aptCode"/>
+        <result column="AptName" property="AptName"/>
+        <result column="buildYear" property="buildYear"/>
+        <result column="dongCode" property="dongCode"/>
+        <result column="dongName" property="dongName"/>
+        <result column="img" property="img"/>
+        <result column="jibun" property="jibun"/>
+        <result column="lat" property="lat"/>
+        <result column="lng" property="lng"/>
+    </resultMap>
+
+    <select id="findByDongCode" parameterType="String" resultMap="homeInfo">
+        select *
+        from houseinfo
+        where dongcode = #{dongCode}
+    </select>
+
+    <select id="getAptInfo" parameterType="String" resultMap="homeInfo">
+        select *
+        from houseinfo
+        where aptCode = #{aptCode}
+    </select>
+
+<!--    <insert id="insert" parameterType="user">-->
+<!--        INSERT INTO user(username, password, email)-->
+<!--        VALUES (#{username}, #{password}, #{email})-->
+<!--    </insert>-->
+
+<!--    <select id="select" parameterType="int" resultMap="user">-->
+<!--        select *-->
+<!--        from user-->
+<!--        where id = #{id}-->
+<!--    </select>-->
+
+<!--    <update id="update" parameterType="map">-->
+<!--        update user-->
+<!--        set email    = #{data.email},-->
+<!--            password = #{data.password}-->
+<!--        where id = #{id}-->
+<!--    </update>-->
+
+<!--    <delete id="delete" parameterType="int">-->
+<!--        DELETE-->
+<!--        FROM user-->
+<!--        WHERE id = #{id}-->
+<!--    </delete>-->
+
+<!--    <select id="searchAll" resultType="user">-->
+<!--        select *-->
+<!--        from user-->
+<!--    </select>-->
+
+</mapper>

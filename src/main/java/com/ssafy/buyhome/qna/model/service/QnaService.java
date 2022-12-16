@@ -5,6 +5,7 @@ import com.ssafy.buyhome.qna.model.dto.Answer;
 import com.ssafy.buyhome.qna.model.dto.Question;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,7 +22,11 @@ public class QnaService {
     }
 
     public Question findById(int id) {
-        return questionDao.select(id);
+        Question question = questionDao.select(id);
+        for (Answer answer : question.getAnswers()) {
+            answer.setAuthor(questionDao.selectAnswerById(answer.getId()).getAuthor());
+        }
+        return question;
     }
 
     public void create(Question question) {
@@ -33,7 +38,25 @@ public class QnaService {
         questionDao.update(question);
     }
 
-    public void createAnswerToQuestion(Answer answer, Integer questionId) {
-        questionDao.insertAnswerToQuestion(answer, questionId);
+
+    public Answer findAnswerById(Integer answerId) {
+        return questionDao.selectAnswerById(answerId);
+    }
+    public void createAnswerToQuestion(Answer answer, Integer qnaId) {
+        questionDao.createAnswerToQuestion(answer, qnaId);
+    }
+
+    public void updateAnswer(Integer answerId, Answer answer) {
+        answer.setId(answerId);
+        questionDao.updateAnswer(answer);
+    }
+
+    @Transactional
+    public void deleteAnswer(Integer answerId) {
+        questionDao.deleteAnswerById(answerId);
+    }
+
+    public void deleteQuestion(Integer qnaId) {
+        questionDao.deleteQuestionById(qnaId);
     }
 }

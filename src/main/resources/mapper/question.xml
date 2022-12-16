@@ -26,7 +26,7 @@
         <result property="title" column="title"/>
         <result property="content" column="content"/>
         <result property="createdTime" column="created_time"/>
-        <association property="author" resultMap="user"/>
+        <association property="author" resultMap="user" columnPrefix="author_"/>
     </resultMap>
 
     <resultMap id="user" type="User">
@@ -86,7 +86,7 @@
         select *
         from question q
                  left join answer a
-                      on (q.user_id = a.question_id)
+                           on (q.user_id = a.question_id)
         where q.user_id = #{userId}
     </select>
 
@@ -98,24 +98,65 @@
 
     <update id="update" parameterType="question">
         update question
-        set title=#{title}, content=#{content}
-        where id=#{id}
+        set title=#{title},
+            content=#{content}
+        where id = #{id}
     </update>
+
+    <delete id="deleteQuestionById" parameterType="int">
+        delete
+        from question
+        where id = #{id}
+    </delete>
 
     <delete id="deleteQuestionByUserId" parameterType="int">
         delete
         from question
-        where user_id=#{userId}
+        where user_id = #{userId}
     </delete>
 
     <delete id="deleteAnswerByQuestionId" parameterType="int">
         delete
         from answer
-        where question_id=#{questionId}
+        where question_id = #{questionId}
     </delete>
 
-    <insert id="insertAnswerToQuestion" parameterType="map">
-        insert into answer (title, content,user_id, question_id)
-        values (#{answer.title}, #{answer.content}, #{answer.user.id}, #{questionId})
+    <insert id="createAnswerToQuestion" parameterType="map">
+        insert into answer (title, content, user_id, question_id)
+        values (#{answer.title}, #{answer.content}, #{answer.author.id}, #{questionId})
     </insert>
+
+    <update id="updateAnswer" parameterType="answer">
+        update answer
+        set title=#{title},
+            content=#{content}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAnswerById" parameterType="int">
+        delete
+        from answer
+        where id = #{id}
+    </delete>
+
+    <select id="selectAnswerById" parameterType="int" resultMap="answer">
+        --         select *
+        select a.id           as id,
+               a.user_id      as user_id,
+               a.title        as title,
+               a.content      as content,
+               a.created_time as created_time,
+               u.id           as author_id,
+               u.username     as author_username,
+               u.nickname     as author_nickname,
+               u.password     as author_password,
+               u.email        as author_email,
+               u.authority    as author_authority,
+               u.created_time as author_created_time
+        from answer a
+                 left join user u
+                           on (a.user_id = u.id)
+        where a.id = #{id}
+    </select>
+
 </mapper>
