@@ -5,7 +5,7 @@ create table question (
     title varchar(50),
     content varchar(256),
 	created_time datetime default now(),
-    foreign key(user_id) references user(id)
+    foreign key(user_id) references user(id) on delete cascade
 );
 
 insert into question (user_id, title, content)

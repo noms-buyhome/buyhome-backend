@@ -22,7 +22,11 @@ public class QnaService {
     }
 
     public Question findById(int id) {
-        return questionDao.select(id);
+        Question question = questionDao.select(id);
+        for (Answer answer : question.getAnswers()) {
+            answer.setAuthor(questionDao.selectAnswerById(answer.getId()).getAuthor());
+        }
+        return question;
     }
 
     public void create(Question question) {
@@ -34,6 +38,10 @@ public class QnaService {
         questionDao.update(question);
     }
 
+
+    public Answer findAnswerById(Integer answerId) {
+        return questionDao.selectAnswerById(answerId);
+    }
     public void createAnswerToQuestion(Answer answer, Integer qnaId) {
         questionDao.createAnswerToQuestion(answer, qnaId);
     }

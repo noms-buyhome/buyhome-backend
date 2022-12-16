@@ -16,4 +16,8 @@ public class HomeService {
     public List<HomeInfo> findByDongCode(String dongCode) {
         return homeDao.findByDongCode(dongCode);
     }
+
+    public HomeInfo getAptInfo(String aptCode){
+        return homeDao.getAptInfo(aptCode);
+    }
 }

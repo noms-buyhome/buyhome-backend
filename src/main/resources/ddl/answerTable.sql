@@ -6,8 +6,8 @@ create table answer (
     title varchar(50),
     content varchar(256),
 	created_time datetime default now(),
-    foreign key(user_id) references user(id),
-	foreign key(question_id) references question(id)
+    foreign key(user_id) references user(id) on delete cascade,
+	foreign key(question_id) references question(id) on delete cascade
 );
 
 insert into answer (user_id, question_id, title, content)
