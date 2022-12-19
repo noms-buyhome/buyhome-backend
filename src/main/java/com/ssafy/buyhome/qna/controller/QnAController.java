@@ -3,6 +3,7 @@ package com.ssafy.buyhome.qna.controller;
 import com.ssafy.buyhome.qna.model.dto.Answer;
 import com.ssafy.buyhome.qna.model.dto.Question;
 import com.ssafy.buyhome.qna.model.service.QnaService;
+import com.ssafy.buyhome.qna.model.service.QuestionVoteService;
 import com.ssafy.buyhome.user.model.exception.UserNotAllowedException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import static com.ssafy.buyhome.util.RequestUtil.getUsernameFromRequest;
 public class QnAController {
 
     private final QnaService qnaService;
+    private final QuestionVoteService questionVoteService;
 
     @GetMapping
     public ResponseEntity<?> list() {
@@ -83,6 +85,18 @@ public class QnAController {
     @PostMapping("/{qnaId}")
     public ResponseEntity<?> createAnswer(@RequestBody Answer answer, @PathVariable Integer qnaId) {
         qnaService.createAnswerToQuestion(answer, qnaId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{qnaid}/vote")
+    public ResponseEntity<Void> vote(@PathVariable("qnaid") Integer qnaId, HttpServletRequest request) {
+        questionVoteService.vote(qnaId, getUsernameFromRequest(request));
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{qnaid}/vote")
+    public ResponseEntity<Void> unvote(@PathVariable("qnaid") Integer qnaId, HttpServletRequest request) {
+        questionVoteService.unvote(qnaId, getUsernameFromRequest(request));
         return ResponseEntity.ok().build();
     }
 }
