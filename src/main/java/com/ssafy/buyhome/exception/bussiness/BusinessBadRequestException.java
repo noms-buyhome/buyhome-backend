@@ -1,4 +1,4 @@
-package com.ssafy.buyhome.exception;
+package com.ssafy.buyhome.exception.bussiness;
 
 public abstract class BusinessBadRequestException extends RuntimeException {
     public BusinessBadRequestException(String message) {

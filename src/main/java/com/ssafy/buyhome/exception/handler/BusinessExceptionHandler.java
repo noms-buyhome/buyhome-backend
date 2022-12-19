@@ -1,5 +1,9 @@
-package com.ssafy.buyhome.exception;
+package com.ssafy.buyhome.exception.handler;
 
+import com.ssafy.buyhome.exception.bussiness.BusinessBadRequestException;
+import com.ssafy.buyhome.exception.bussiness.BusinessDuplicatedException;
+import com.ssafy.buyhome.exception.bussiness.BusinessNotFoundException;
+import com.ssafy.buyhome.exception.bussiness.BusinessUnauthorizedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
