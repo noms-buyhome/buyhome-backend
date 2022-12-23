@@ -16,6 +16,15 @@
         <result column="lng" property="lng"/>
     </resultMap>
 
+    <resultMap id="deal" type="Deal">
+        <result column="dealYear" property="dealYear"/>
+        <result column="dealMonth" property="dealMonth"/>
+        <result column="dealDay" property="dealDay"/>
+        <result column="area" property="area"/>
+        <result column="floor" property="floor"/>
+        <result column="dealAmount" property="dealAmount"/>
+    </resultMap>
+
     <select id="findByDongCode" parameterType="String" resultMap="homeInfo">
         select *
         from houseinfo
@@ -26,6 +35,13 @@
         select *
         from houseinfo
         where aptCode = #{aptCode}
+    </select>
+
+    <select id="getAptDeals" parameterType="String" resultMap="deal">
+        select *
+        from buyhome.housedeal
+        where aptCode = #{aptCode}
+        order by 4 desc, 5 desc, 6 desc;
     </select>
 
 <!--    <insert id="insert" parameterType="user">-->

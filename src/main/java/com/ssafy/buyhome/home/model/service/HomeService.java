@@ -1,6 +1,7 @@
 package com.ssafy.buyhome.home.model.service;
 
 import com.ssafy.buyhome.home.model.dao.HomeDao;
+import com.ssafy.buyhome.home.model.dto.Deal;
 import com.ssafy.buyhome.home.model.dto.HomeInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,4 +21,6 @@ public class HomeService {
     public HomeInfo getAptInfo(String aptCode){
         return homeDao.getAptInfo(aptCode);
     }
+
+    public List<Deal> getAptDeals(String aptCode) {return homeDao.getAptDeals(aptCode); }
 }

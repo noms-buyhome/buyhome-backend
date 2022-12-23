@@ -1,5 +1,6 @@
 package com.ssafy.buyhome.home.model.dao;
 
+import com.ssafy.buyhome.home.model.dto.Deal;
 import com.ssafy.buyhome.home.model.dto.HomeInfo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,4 +11,7 @@ public interface HomeDao {
 
     List<HomeInfo> findByDongCode(String dongCode);
     HomeInfo getAptInfo(String aptCode);
+    List<Deal> getAptDeals(String aptCode);
+
+
 }
