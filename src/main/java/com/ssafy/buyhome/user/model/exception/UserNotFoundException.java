@@ -1,6 +1,6 @@
 package com.ssafy.buyhome.user.model.exception;
 
-import com.ssafy.buyhome.exception.BusinessNotFoundException;
+import com.ssafy.buyhome.exception.bussiness.BusinessNotFoundException;
 
 public class UserNotFoundException extends BusinessNotFoundException {
     public UserNotFoundException() {

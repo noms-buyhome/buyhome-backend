@@ -1,6 +1,6 @@
 package com.ssafy.buyhome.user.model.exception;
 
-import com.ssafy.buyhome.exception.BusinessForbiddenException;
+import com.ssafy.buyhome.exception.bussiness.BusinessForbiddenException;
 
 public class UserNotAllowedException extends BusinessForbiddenException {
     public UserNotAllowedException() {
