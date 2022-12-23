@@ -1,0 +1,5 @@
+DELETE http://localhost:80/api/board/qna/2/vote
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzc2FmeSIsImF1dGhvcml0eSI6InVzZXIiLCJleHAiOjE2NzE0OTI0Njl9.XdiDzdnDkbLoK1Wvf6oLkW0CIaXCLQmcfcx_6_tC0qc
+
+###

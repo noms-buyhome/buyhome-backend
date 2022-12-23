@@ -1,6 +1,6 @@
 package com.ssafy.buyhome.user.model.exception;
 
-import com.ssafy.buyhome.exception.BusinessDuplicatedException;
+import com.ssafy.buyhome.exception.bussiness.BusinessDuplicatedException;
 
 public class UsernameDuplicatedException extends BusinessDuplicatedException {
     public UsernameDuplicatedException() {

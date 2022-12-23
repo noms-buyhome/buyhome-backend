@@ -20,7 +20,6 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private final static String AUTH_HEADER = "Authorization";
     private final TokenProvider tokenProvider;
-    private static final String[] NEED_AUTH = {"/api/user"};
     private static final String[] NO_NEED_AUTH_PREFIX = {"/api/auth", "/api/home"};
 
     @Override
